@@ -1,0 +1,44 @@
+server:
+  port: 8888  #porta para os testes rodarem n pode ser a msm usada na aplicação para não da erro caso a aplicação esteja rodando e a porta já esteja em usu
+
+file: #feito para ser usado na parte de upload de arquivos
+  upload-dir: /Users/anafe/OneDrive/Documentos/workspace-estagio/spring/arquivoUpload
+
+email:
+  subject: "Default Subject"
+  message: "Default Message"
+
+spring:
+  application:
+    name: matematico
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none #nono por que estou trabalhando com migration
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: false
+  mail: #usado para trabalhar com o envio de email na aplicação
+    host: smtp.gmail.com #trabalhando com o gmail
+    port: 587
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enabled: true
+      mail.smtp.starttls.requerid: true
+  servlet:  #referente a parte de upload de arquivos, em como esse arquivos
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB  #tamanho dos arquivos
+      max-file-size: 200MB  #tamanho dos arquivos
+      max-request-size: 215 MB  #tamanho dos arquivos
+
+logging:  #USADO PARA TRABALHAR COM LOGS DE UMA FORMA MAIS OBJETIVA E PRECISA
+  level:
+    #root: warn # se deixar so ele, quando a aplicação é execultada n aprece todos os logs de info padroes, fica apenas o nome spring com o console mas limpo, geralmente utilizado em produção, coso tenha logs de infor na aplicação ele tbm n fica visivel, ficando visiveis apenas os logs de warn e erro economiza recursos
+    com.anamariafelix.matematico: debug  # PODE SER DE QUALQUER NIVEL DE LOG (TRACE, INFO, DEBUG, WARN), usando isso é possivel visualizar logs de debug no console, sem os logs de debug n aparecem no console
