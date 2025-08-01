@@ -1,10 +1,9 @@
 name: Continuos Integration and Delivery With Github Actions
-
+#criado diretamente no git, na parte de acction -> docker images, dentro dele atualiza essa primeira linha de name e mudar o nome do arquivo para continuos-deployments.yml
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: #liberação das branch que podem ser feitas push, caso tivesse mais branchs poderia colocar aqui
+      - "main"
 
 jobs:
 
@@ -14,5 +13,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Login to Docker Hub  #configuração para fazer login com o docker hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }} #mesmos nomes que foi colocado nas variaveis de ambientes do guthub
+        password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+
+    - uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin' # See 'Supported distributions' for available options
+        cache: maven
+
