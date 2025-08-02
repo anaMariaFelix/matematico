@@ -5,6 +5,7 @@ email:
   subject: "Default Subject"
   message: "Default Message"
 
+
 spring:
   application:
     name: matematico
