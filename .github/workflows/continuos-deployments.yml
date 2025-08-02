@@ -20,9 +20,24 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }} #mesmos nomes que foi colocado nas variaveis de ambientes do guthub
         password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
-    - uses: actions/setup-java@v4
+    - name: Setup Java 21
+      uses: actions/setup-java@v4
       with:
         java-version: '21'
         distribution: 'temurin' # See 'Supported distributions' for available options
         cache: maven
 
+    - name: Build Application .jar  #faz o build do jar
+      working-directory: ./spring/matematico  #caminho para acessar o projeto na minha maquina
+      run: mvn clean package
+
+    - name: Docker Compose Build  #faz o build da docker image
+      working-directory: ./spring
+      run: docker compose build
+
+    - name: Push to Docker Hub Container Registry  #faz o push da image para o docker hub
+      run:
+        docker tag ${{ secrets.DOCKER_USERNAME }}/projeto-person-matematico:latest ${{ secrets.DOCKER_USERNAME }}/projeto-person-matematico:${{ github.run_id }} #comando para criar uma tag
+        
+        docker push ${{ secrets.DOCKER_USERNAME }}/projeto-person-matematico:latest #comando para subir uma image para o docker hub nesse caso da latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/projeto-person-matematico:${{ github.run_id }} #comando para subir uma image para o docker hub nesse caso da do job
