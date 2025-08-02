@@ -28,11 +28,11 @@ jobs:
         cache: maven
 
     - name: Build Application .jar  #faz o build do jar
-      working-directory: matematico  #caminho para acessar o projeto na minha maquina
+      working-directory: spring/matematico  #caminho para acessar o projeto na minha maquina
       run: mvn clean package
 
     - name: Docker Compose Build  #faz o build da docker image
-      working-directory: ./spring
+      working-directory: spring
       run: docker compose build
 
     - name: Push to Docker Hub Container Registry  #faz o push da image para o docker hub
