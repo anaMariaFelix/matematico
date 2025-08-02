@@ -18,7 +18,7 @@ services:
   projeto-person-matematico: # imagem do meu banco
     image: anafelix0909/projeto-person-matematico
     restart: always
-    build: ./matematico
+    build: .
     working_dir: /matematico
     environment:
       TZ: America/Sao_Paulo
