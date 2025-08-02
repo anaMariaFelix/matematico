@@ -2,7 +2,7 @@ server:
   port: 8888  #porta para os testes rodarem n pode ser a msm usada na aplicação para não da erro caso a aplicação esteja rodando e a porta já esteja em usu
 
 file: #feito para ser usado na parte de upload de arquivos
-  upload-dir: /home/runner/work/spring/arquivoUpload
+  upload-dir: /home/runner/work/sistema-person-matematico/sistema-person-matematico/spring/matematico
 
 email:
   subject: "Default Subject"
