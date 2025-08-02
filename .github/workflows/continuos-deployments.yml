@@ -36,7 +36,7 @@ jobs:
       run: docker compose build
 
     - name: Push to Docker Hub Container Registry  #faz o push da image para o docker hub
-      run:
+      run: |
         docker tag ${{ secrets.DOCKER_USERNAME }}/projeto-person-matematico:latest ${{ secrets.DOCKER_USERNAME }}/projeto-person-matematico:${{ github.run_id }} #comando para criar uma tag
         
         docker push ${{ secrets.DOCKER_USERNAME }}/projeto-person-matematico:latest #comando para subir uma image para o docker hub nesse caso da latest
