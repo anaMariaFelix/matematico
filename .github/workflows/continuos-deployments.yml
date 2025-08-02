@@ -41,3 +41,4 @@ jobs:
         
         docker push ${{ secrets.DOCKER_USERNAME }}/projeto-person-matematico:latest #comando para subir uma image para o docker hub nesse caso da latest
         docker push ${{ secrets.DOCKER_USERNAME }}/projeto-person-matematico:${{ github.run_id }} #comando para subir uma image para o docker hub nesse caso da do job
+
